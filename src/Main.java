@@ -34,5 +34,8 @@ public class Main {
 
         invoker.doExercise(standUp);
         invoker.doExercise(sitDown);
+
+        invoker.undoExercise();
+
     }
 }

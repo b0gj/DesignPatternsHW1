@@ -8,6 +8,9 @@ import java.util.List;
 
 public class Trainee implements IObserver, IObservable {
 
+    private static final String RESET = "\u001B[0m";
+    private static final String BLUE = "\u001B[34m";
+
     private String name;
     private IObservable trainer;
     private final List<IObserver> spectators;
@@ -21,19 +24,16 @@ public class Trainee implements IObserver, IObservable {
     //IObserver
     @Override
     public void update() {
-        System.out.println("\nThe trainee " + this.name
+        System.out.println(BLUE + "\nThe trainee " + this.name
                 + " does the exercise " + trainer.getUpdate()
                 + ", because the trainer " + ((Trainer) trainer).getName()
-                + " told them to");
+                + " told them to" + RESET);
         this.setExercise(trainer.getUpdate());
     }
 
     @Override
     public void setObservable(IObservable observable) {
         this.trainer = observable;
-
-        System.out.println("The trainee " + this.name
-                + " is now being trained by " + ((Trainer) trainer).getName());
     }
 
     //IObservable
@@ -48,8 +48,8 @@ public class Trainee implements IObserver, IObservable {
         this.spectators.remove(observer);
         observer.setObservable(null);
 
-        System.out.println("The viewer " + ((Spectator) observer).getName()
-                + " stopped watching the streamer/trainee " + this.name);
+        System.out.println(BLUE + "The viewer " + ((Spectator) observer).getName()
+                + " stopped watching the streamer/trainee " + this.name + RESET);
     }
 
     @Override
@@ -72,7 +72,4 @@ public class Trainee implements IObserver, IObservable {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 }
